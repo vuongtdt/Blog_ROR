@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title My Site
+  body
+    h1 Users
+    table
+        thead
+            tr
+                th User ID
+                th User Name
+                th Roll
+        tbody 
+        - @users.each do |user|
+            tr
+                td=user[:id]
+                td=user[:username]
+                td=user[:roll]
+    form action="/users" method="post"
+        div 
+            label> for="username" Enter your name:
+            input type="text" name="username" id="username"
+        div 
+            label for="roll" Enter your roll:
+            input type="text" name="roll" id="roll"
+        div
+            input type="submit" value="Submit"
+css:
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+    }
+    th {
+        color: green;
+    }
