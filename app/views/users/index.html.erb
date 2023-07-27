@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Site</title>
+</head>
+<body>
+    <h1>Users</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Roll</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% @users.each do |user|%>
+            <tr>
+                <td><%= user.id %></td>
+                <td><%= user.username %></td>
+                <td><%= user.roll %></td>
+            </tr>
+            <% end %>
+        </tbody>
+    </table>
+    <form action="/users" method="post">
+        <div>
+            <label for="username">Enter your name:</label> 
+            <input id="username" name="username" type="text" />
+        </div>
+        <div>
+            <label for="roll">Enter your roll:</label>
+            <input id="roll" name="roll" type="text" />
+        </div>
+        <div>
+            <input type="submit" value="Submit" />
+        </div>
+    </form>
+</body>
+</html>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    th {
+        color: green;
+    }
+</style>
