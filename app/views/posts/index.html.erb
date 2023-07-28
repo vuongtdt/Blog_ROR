@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Site</title>
+</head>
+<body>
+    <h1>Wellcome <%= @user.email %>!</h1>
+    <h1>Your Posts!</h1>
+    <%= link_to "Create new post", new_post_path, method: :get%>
+    <div class="posts">
+        <%@posts.each do |post|%>
+            <div class="post">
+                <h2><%= link_to post.title, post%></h2>
+                <p><%= post.status%></p>
+            </div>
+        <% end %>
+    </div>
+    
+</body>
+</html>
+<style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 15px;
+        min-width: 100px;
+        text-align: center;
+    }
+
+    th {
+        color: green;
+    }
+    .posts{
+        display: flex;
+        flex-wrap: wrap;
+        min-width: 960px;
+        max-width: 960px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .post{
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #000;
+        border-radius: 12px;
+        width: 100%;
+        height: 120px;
+    }
+</style>

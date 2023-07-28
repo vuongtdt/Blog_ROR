@@ -6,11 +6,7 @@
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
 
-User.create(username: "A", roll: "123")
-User.create(username: "B", roll: "123")
-User.create(username: "C", roll: "123")
-
 Post.create(user_id: 1, title: "Title-1", body: "123")
 Post.create(user_id: 2, title: "Title-2", body: "123")
-Post.create(user_id: 3, title: "Title-3", body: "123")
+Post.create(user_id: 2, title: "Title-3", body: "123")
 Post.create(user_id: 1, title: "Title-4", body: "123")

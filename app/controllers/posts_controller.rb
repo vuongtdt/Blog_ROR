@@ -1,13 +1,29 @@
-class PostsController < ActionController::Base
+class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
-
+    before_action :authenticate_user!, except: [:index, :new, :create, :update, :destroy, :show]
     def index
-        @posts = Post.all
+        @posts = current_user.posts
+        @user = current_user
         render 'posts/index'
     end
 
     def show
+        @post
         render 'show'
+    end
+
+    def new
+        @new_post = Post.new
+    end
+
+    def create
+        @new_post = Post.new(create_post_params)
+        @new_post.user_id = current_user.id
+        if @new_post.save
+            redirect_to posts_path, notice: 'Created post successfully!'
+        else
+            render :new
+        end
     end
 
     def edit
@@ -34,10 +50,13 @@ class PostsController < ActionController::Base
 
     def set_post
         @post = Post.find(params[:id])
-        puts @post
+    end
+
+    def create_post_params
+        params.require(:post).permit(:title, :body, status)
     end
 
     def post_params
-        params.require(:post).permit(:title, :body, :status)
+        params.require(:post).permit(:id, :title, :body, :status)
     end
 end

@@ -1,17 +1,25 @@
-class UsersController < ActionController::Base
-    skip_before_action :verify_authenticity_token
+class UsersController < ApplicationController
+    # skip_before_action :verify_authenticity_token
+    before_action :authenticate_user!
 
     def index
         @users = User.all
         render "index" 
     end
 
+    def login
+        render "login"
+    end
+
     def new
         @user = User.new
     end
 
+    def show
+        redirect_to root_path
+    end
+
     def create
-        debugger
         @user = User.new(user_params)
         if @user.save
             redirect_to root_path, notice: 'Success!'
@@ -23,7 +31,6 @@ class UsersController < ActionController::Base
     private
     
     def user_params
-        debugger
         params.permit(:username, :roll)
     end
 end
