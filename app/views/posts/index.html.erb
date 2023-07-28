@@ -6,7 +6,6 @@
 <body>
     <h1>Wellcome <%= @user.email %>!</h1>
     <h1>Your Posts!</h1>
-    <%= link_to "Create new post", new_post_path, method: :get%>
     <div class="posts">
         <%@posts.each do |post|%>
             <div class="post">
@@ -16,6 +15,7 @@
         <% end %>
     </div>
     
+    <%= render 'form'%>
 </body>
 </html>
 <style>

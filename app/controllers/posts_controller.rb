@@ -13,13 +13,14 @@ class PostsController < ApplicationController
     end
 
     def new
-        @new_post = Post.new
+        @post = current_user.posts.build
     end
 
     def create
-        @new_post = Post.new(create_post_params)
-        @new_post.user_id = current_user.id
-        if @new_post.save
+        # debugger
+        puts current_user.id
+        @post = current_user.posts.build(post_params)
+        if @post.save
             redirect_to posts_path, notice: 'Created post successfully!'
         else
             render :new
@@ -30,6 +31,7 @@ class PostsController < ApplicationController
     end
 
     def update
+        # debugger
         if @post.update(post_params)
             redirect_to posts_path, notice: 'Post was successfully updated!'
         else
@@ -38,7 +40,6 @@ class PostsController < ApplicationController
     end
     
     def destroy
-        puts "Trigger destroy"
         @post.destroy
         respond_to do |format|
             format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
@@ -52,11 +53,7 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
     end
 
-    def create_post_params
-        params.require(:post).permit(:title, :body, status)
-    end
-
     def post_params
-        params.require(:post).permit(:id, :title, :body, :status)
+        params.require(:post).permit(:title, :body, :status)
     end
 end
