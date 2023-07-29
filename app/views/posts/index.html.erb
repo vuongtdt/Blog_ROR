@@ -6,6 +6,8 @@
 <body>
     <h1>Wellcome <%= @user.email %>!</h1>
     <h1>Your Posts!</h1>
+    <%= link_to "Home", root_path %>
+    <%= link_to "New post", new_post_path %>
     <div class="posts">
         <%@posts.each do |post|%>
             <div class="post">
@@ -14,8 +16,6 @@
             </div>
         <% end %>
     </div>
-    
-    <%= render 'form'%>
 </body>
 </html>
 <style>

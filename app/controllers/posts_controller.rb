@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
     before_action :set_post, only: [:show, :edit, :update, :destroy]
-    before_action :authenticate_user!, except: [:index, :new, :create, :update, :destroy, :show]
+    before_action :authenticate_user!, except: [:index, :show]
     def index
         @posts = current_user.posts
         @user = current_user
@@ -16,9 +16,7 @@ class PostsController < ApplicationController
         @post = current_user.posts.build
     end
 
-    def create
-        # debugger
-        puts current_user.id
+    def create    
         @post = current_user.posts.build(post_params)
         if @post.save
             redirect_to posts_path, notice: 'Created post successfully!'
@@ -31,7 +29,6 @@ class PostsController < ApplicationController
     end
 
     def update
-        # debugger
         if @post.update(post_params)
             redirect_to posts_path, notice: 'Post was successfully updated!'
         else
